@@ -14,4 +14,6 @@ public class Produto implements Serializable {
     private Long id;
 
     private String nome;
+
+    private Float preco;
 }

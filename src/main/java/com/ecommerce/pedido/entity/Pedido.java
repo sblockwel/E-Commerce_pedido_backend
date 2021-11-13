@@ -12,7 +12,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long numero;
+    private Integer numero;
 
     private Date dataEmissao;
 
@@ -21,14 +21,15 @@ public class Pedido implements Serializable {
             name = "FK_CLIENTE",
             foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT)
     )
-
     private Cliente cliente;
 
+    @OneToMany
     private List<Item> itens;
 
-    private Integer quantidade;
+    private Integer quantidadeItem;
 
     private float total;
+
 
     public Long getId() {
         return id;
@@ -38,11 +39,11 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Long getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -62,12 +63,12 @@ public class Pedido implements Serializable {
         this.itens = itens;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public Integer getQuantidadeItem() {
+        return quantidadeItem;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeItem(Integer quantidade) {
+        this.quantidadeItem = quantidadeItem;
     }
 
     public float getTotal() {
@@ -76,5 +77,13 @@ public class Pedido implements Serializable {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

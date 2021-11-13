@@ -1,9 +1,6 @@
 package com.ecommerce.pedido.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -14,4 +11,11 @@ public class Item implements Serializable {
     private Long id;
 
     private String nome;
+
+    @ManyToOne
+    private Produto produto;
+
+    private Integer quantidade;
+
+
 }
