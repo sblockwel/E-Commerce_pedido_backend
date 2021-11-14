@@ -3,7 +3,6 @@ package com.ecommerce.pedido.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Pedido implements Serializable {
@@ -12,24 +11,17 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer numero;
 
     private Date dataEmissao;
 
     @ManyToOne
     @JoinColumn(
-            name = "FK_CLIENTE",
+            name = "cliente_id",
             foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT)
     )
     private Cliente cliente;
-
-    @OneToMany
-    private List<Item> itens;
-
-    private Integer quantidadeItem;
-
-    private float total;
-
 
     public Long getId() {
         return id;
@@ -53,30 +45,6 @@ public class Pedido implements Serializable {
 
     public void setDataEmissao(Date dataEmissao) {
         this.dataEmissao = dataEmissao;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
-
-    public Integer getQuantidadeItem() {
-        return quantidadeItem;
-    }
-
-    public void setQuantidadeItem(Integer quantidade) {
-        this.quantidadeItem = quantidadeItem;
-    }
-
-    public float getTotal() {
-        return total;
-    }
-
-    public void setTotal(float total) {
-        this.total = total;
     }
 
     public Cliente getCliente() {
