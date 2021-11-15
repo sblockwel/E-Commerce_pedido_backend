@@ -47,9 +47,18 @@ public class PedidoController extends BaseApp {
         }
     }
 
+    @GetMapping("/itens/{id}")
+    public ResponseEntity getItensPedido(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(pedidoRepository.getItensPedido(id));
+    }
+
     @GetMapping
-    public List<Pedido> findAll() {
-        return pedidoRepository.findAll();
+    public List<PedidoResponse> findAll() {
+        var pedidosResponse = pedidoRepository.getPedidos();
+        for (var pedido: pedidosResponse) {
+            pedido.setValorTotal(pedidoRepository.getSumPedido(pedido.getNumero()));
+        }
+        return pedidosResponse;
     }
 
     @GetMapping("/{id}")
@@ -71,7 +80,8 @@ public class PedidoController extends BaseApp {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Pedido> delete(@PathVariable("id") Long id) {
-        pedidoRepository.deleteById(id);
+        pedidoRepository.removeItensPedido(id);
+        pedidoRepository.removePedidoByNumero(id);
         return ResponseEntity.ok().build();
     }
 

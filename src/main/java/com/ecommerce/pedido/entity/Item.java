@@ -20,7 +20,7 @@ public class Item implements Serializable {
 
     private Integer quantidade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Pedido pedido;
 
     public Pedido getPedido() {
